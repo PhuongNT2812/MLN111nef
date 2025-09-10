@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vai trò nền tảng - Triết Học Mác - Lênin & Chuyển Đổi Số</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; 
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #ac541c, #86623e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .animated-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animated-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-[#59402d]">
+
+    <!-- =========== HEADER VÀ MENU MỚI =========== -->
+    <header class="sticky top-0 z-30 bg-[#ac541c] text-white shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="https://i.imgur.com/GqN4g2W.png" alt="FPT University Logo" class="h-10">
+            </a>
+            <nav class="flex items-center space-x-4 font-semibold">
+                <a href="index.html" class="px-3 py-2 hover:bg-black/10 rounded-md transition-colors">Trang chủ</a>
+                <div x-data="{ open: false }" @mouseleave="open = false" class="relative">
+                    <a @mouseover="open = true" href="#" class="px-3 py-2 bg-black/20 rounded-md transition-colors flex items-center">
+                        Nội dung
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div x-show="open" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-1000"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-xl text-[#59402d]">
+                        <a href="history.html" class="block px-4 py-3 text-sm hover:bg-[#f4f1ea] transition-colors">Lịch sử Triết học Mác - Lênin</a>
+                        <a href="platform_role.html" class="block px-4 py-3 text-sm bg-[#f4f1ea] font-bold transition-colors">Vai trò nền tảng</a>
+                        <a href="digital_role.html" class="block px-4 py-3 text-sm hover:bg-[#f4f1ea] transition-colors">Vai trò trong Chuyển đổi số</a>
+                    </div>
+                </div>
+                <a href="quiz.html" class="px-3 py-2 hover:bg-black/10 rounded-md transition-colors">Quiz</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- =========== NỘI DUNG TRANG VAI TRÒ NỀN TẢNG =========== -->
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <header class="text-center mb-10"><h1 class="text-4xl md:text-5xl font-bold gradient-text">Vai trò Nền tảng trong Sự nghiệp Đổi mới</h1></header>
+        <main class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-lg animated-item">
+             <section>
+                <div class="space-y-6 text-[#59402d] leading-relaxed">
+                    <p>Đại hội Đại biểu toàn quốc Đảng Cộng sản Việt Nam lần thứ VI - năm 1986, Đảng đã đặt ra đường lối đổi mới cho đất nước. Đây là một bước ngoặt mang tính lịch sử, đưa đất nước thoát khỏi khủng hoảng và đạt được những thành tựu to lớn, có ý nghĩa lịch sử, tiến tới đưa đất nước hội nhập phát triển và tiến lên chủ nghĩa xã hội. Thành công đó có được là nhờ sự vận dụng sáng tạo chủ nghĩa Mác - Lênin, trong đó triết học Mác - Lênin giữ vai trò cốt lõi, định hướng cho hành động.</p>
+                    <div class="p-4 bg-[#f4f1ea] rounded-lg border-l-4 border-[#ac541c]">
+                        <h3 class="font-semibold text-lg text-[#59402d]">Thế giới quan và phương pháp luận khoa học</h3>
+<p class="mt-2">Triết học Mác - Lênin là thế giới quan, phương pháp luận khoa học và cách mạng cho con người trong nhận thức và thực tiễn. Triết học Mác - Lênin đã trang bị cho Đảng và nhân dân ta một thế giới quan và một phương pháp luận duy vật biện chứng, giúp ta nhận thức thế giới vật chất một cách khách quan và toàn diện trong sự vận động và phát triển không ngừng. Những nguyên lý và quy luật của cơ bản của phép biện chứng duy vật, của chủ nghĩa duy vật lịch sử và của triết học Mác - Lênin là sự phản ánh những mặt, những thuộc tính, những mối liên hệ phổ biến nhất của hiện thực khách quan. Chính vì thế mà chúng ta đã khắc phục được tư duy chủ quan, lý luận sai lầm, định hướng chưa đúng của thời kỳ trước khi đổi mới. Phương pháp luận duy vật biện chứng với các nguyên tắc toàn diện, phát triển, lịch sử - cụ thể đã trở thành công cụ tư duy lý luận sắc bén để phân tích đúng đắn những mâu thuẫn nội tại của nền kinh tế - xã hội, từ đó tìm ra con đường phát triển phù hợp với đất nước. Việc chuyển đổi từ mô hình kinh tế kế hoạch hóa tập trung sang kinh tế thị trường định hướng xã hội chủ nghĩa chính là minh chứng sống động cho sự vận dụng thành công phương pháp luận này.</p>
+                         <p class="mt-2">Triết học Mác - Lênin là thế giới quan, phương pháp luận khoa học và cách mạng để phân tích xu hướng phát triển của xã hội trong điều kiện cuộc cách mạng khoa học - công nghệ hiện đại phát triển mạnh mẽ. Bản chất của cuộc cách mạng công khoa học công nghệ hiện đại là sự cải biên về chất các lực lượng sản xuất trên cơ sở tri thức khoa học ngày càng trở thành lực lượng sản xuất trực tiếp. Trong bối cảnh đó, triết học Mác - Lênin đóng vai trò rất quan trọng, là cơ sở lý luận, phương pháp luận cho các phát minh khoa học, cho sự tích hợp và truyền bá tri thức khoa học hiện đại. Nó giúp chúng ta nhận thức được rằng khoa học - công nghệ trở thành lực lượng sản xuất trực tiếp, là động lực quan trọng cho sự phát triển của đất nước. Điều này trả lời cho câu hỏi tại sao Việt Nam phải chủ động, tích cực hội nhập quốc tế và tiếp thu tinh hoa công nghệ của nhân loại để phát triển đất nước, đồng thời nhận diện và giải quyết các thách thức mới do quá trình này đặt ra.</p>
+                    </div>
+                    <div class="p-4 bg-[#f4f1ea] rounded-lg">
+                        <h3 class="font-semibold text-lg text-[#59402d]">Cơ sở lý luận vững chắc cho con đường đi lên chủ nghĩa xã hội</h3>
+<p class="mt-2">Trong bối cảnh phức tạp của thế giới sau khi mô hình chủ nghĩa xã hội ở Liên Xô và Đông Âu sụp đổ, triết học Mác - Lênin, đặc biệt là chủ nghĩa duy vật lịch sử, đã khẳng định tính tất yếu của con đường đi lên chủ nghĩa xã hội ở Việt Nam. Nó cung cấp những luận cứ khoa học để Đảng ta kiên định mục tiêu độc lập dân tộc gắn liền với chủ nghĩa xã hội, giữ vững vai trò lãnh đạo của Đảng và bản chất của Nhà nước pháp quyền xã hội chủ nghĩa. Đây chính là "sợi chỉ đỏ" xuyên suốt, là "kim chỉ nam" giúp con thuyền cách mạng Việt Nam không bị chệch hướng trong quá trình hội nhập và phát triển.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- =========== FOOTER (PHỤ LỤC) =========== -->
+    <div class="bg-[#59402d] text-gray-300 w-full py-12 mt-10">
+        <div class="container mx-auto px-4 animated-item">
+            <footer class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-left text-sm">
+                <div class="md:col-span-1">
+                    <div class="text-sm text-gray-400 font-semibold">
+                        <p>MLN111 - SE1708 - ThuyHTV</p>
+                        <p>do nhóm 1 thực hiện</p>
+                    </div>
+                </div>
+                <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <div>
+                        <h2 class="text-xl font-bold text-white mb-4">Phụ lục các mục</h2>
+                         <ul class="space-y-2 text-gray-400">
+                            <li><strong class="text-gray-200">Trang chủ:</strong> Tổng quan và sơ lược.</li>
+                            <li><strong class="text-gray-200">Nội dung:</strong> Lịch sử, Vai trò Nền tảng và Vai trò trong CĐS.</li>
+                            <li><strong class="text-gray-200">Quiz:</strong> Bài trắc nghiệm củng cố kiến thức.</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h2 class="text-xl font-bold text-white mb-4">Phụ lục AI</h2>
+                        <p class="text-gray-400">Trang web này được xây dựng với sự hỗ trợ của AI để tổng hợp, cấu trúc nội dung và tạo mã nguồn.</p>
+                    </div>
+                </div>
+            </footer>
+            <div class="text-left max-w-6xl mx-auto mt-8 text-gray-500 text-sm">
+                 <p>&copy; 2025. Nội dung tổng hợp từ tài liệu học tập.</p>
+            </div>
+        </div>
+    </div>
+    
+    <button id="to-top-button" title="Go To Top" class="hidden fixed z-50 bottom-10 right-10 p-4 border-0 w-14 h-14 rounded-full shadow-md bg-[#ac541c] hover:bg-[#86623e] text-white text-lg font-semibold transition-opacity duration-300">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 4l8 8h-6v8h-4v-8H4l8-8z" /></svg>
+    </button>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.animated-item').forEach(el => observer.observe(el));
+            
+            const toTopButton = document.getElementById('to-top-button');
+            if (toTopButton) {
+                window.onscroll = () => {
+                    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                        toTopButton.classList.remove('hidden');
+                    } else {
+                        toTopButton.classList.add('hidden');
+                    }
+                };
+                toTopButton.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch Sử - Triết Học Mác - Lênin & Chuyển Đổi Số</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; 
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #ac541c, #86623e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .animated-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animated-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-[#59402d]">
+
+    <!-- =========== HEADER VÀ MENU MỚI =========== -->
+    <header class="sticky top-0 z-30 bg-[#ac541c] text-white shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="https://i.imgur.com/GqN4g2W.png" alt="FPT University Logo" class="h-10">
+            </a>
+            <nav class="flex items-center space-x-4 font-semibold">
+                <a href="index.html" class="px-3 py-2 hover:bg-black/10 rounded-md transition-colors">Trang chủ</a>
+                <div x-data="{ open: false }" @mouseleave="open = false" class="relative">
+                    <a @mouseover="open = true" href="#" class="px-3 py-2 bg-black/20 rounded-md transition-colors flex items-center">
+                        Nội dung
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div x-show="open" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-1000"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-xl text-[#59402d]">
+                        <a href="history.html" class="block px-4 py-3 text-sm bg-[#f4f1ea] font-bold transition-colors">Lịch sử Triết học Mác - Lênin</a>
+                        <a href="platform_role.html" class="block px-4 py-3 text-sm hover:bg-[#f4f1ea] transition-colors">Vai trò nền tảng</a>
+                        <a href="digital_role.html" class="block px-4 py-3 text-sm hover:bg-[#f4f1ea] transition-colors">Vai trò trong Chuyển đổi số</a>
+                    </div>
+                </div>
+                <a href="quiz.html" class="px-3 py-2 hover:bg-black/10 rounded-md transition-colors">Quiz</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- =========== NỘI DUNG TRANG LỊCH SỬ =========== -->
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <header class="text-center mb-10"><h1 class="text-4xl md:text-5xl font-bold gradient-text">Lịch sử Triết học Mác - Lênin</h1></header>
+        <main class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-lg animated-item">
+             <section class="space-y-6 text-[#59402d] leading-relaxed">
+                <p>Chủ nghĩa Mác - Lênin ra đời vào những năm 40 của thế kỉ XIX do C.Mác và Ph.Ăngghen sáng lập, V.I.Lênin bổ sung, phát triển, đã nhanh chóng trở thành vũ khí lí luận của giai cấp vô sản trên toàn thế giới trong cuộc cách mạng giải phóng mình và giải phóng nhân loại. Đặc biệt ở những nước đi theo con đường cách mạng vô sản, chủ nghĩa Mác - Lênin trở thành kim chỉ nam của hành động. Nói tới chủ nghĩa Mác - Lênin là nói tới thế giới quan duy vật, phương pháp luận biện chứng duy vật cùng hệ tư tưởng khoa học của giai cấp công nhân dưới sự lãnh đạo của Đảng Cộng sản. Sự phát triển của chủ nghĩa Mác - Lênin đã mở ra một thời kì mới trong lịch sử: thời kì quá độ từ chủ nghĩa tư bản lên chủ nghĩa xã hội trên phạm vi toàn thế giới vào những năm 70 của thế kỉ trước. Bản chất khoa học, cách mạng và nhân văn của chủ nghĩa Mác - Lênin đã tạo nên sức sống mãnh liệt mà chưa có một học thuyết nào kể cả học thuyết hiện đại ra đời sau này vượt qua được.</p>
+                <figure class="my-4">
+<img src="https://placehold.co/800x450/86623e/f4f1ea?text=Lenin+o+Petrograd+1917" alt="Lãnh tụ Vladimir Ilyich Lênin tại Petrograd năm 1917" class="mx-auto rounded-lg shadow-md">
+                    <figcaption class="text-center text-sm mt-2 text-gray-500">Lãnh tụ Vladimir Ilyich Lênin phát biểu trước người dân tại Petrograd năm 1917. (Ảnh tư liệu)</figcaption>
+                </figure>
+                <p>Triết học Mác - Lênin nghiên cứu về những quy luật chung nhất của tự nhiên, xã hội và tư duy. Đây là công cụ để con người nhận thức thế giới dưới dạng khái quát nhất. Việc phát hiện ra những quy luật chung đó được ví như các khoa học cụ thể phát minh ra những định luật, nhờ đó có thể giải thích một cách khoa học, chứng minh sự vận động, phát triển của tự nhiên, xã hội và tư duy. Là bộ phận cấu thành của chủ nghĩa Mác - Lênin, triết học góp phần quan trọng trong việc hình thành và phát triển thế giới quan duy vật, phương pháp luận duy vật biện chứng. Trong tác phẩm Luận cương về Phoi - ơ - bắc, C.Mác khẳng định: “Các nhà triết học đã chỉ giải thích thế giới bằng nhiều cách khác nhau, song vấn đề là cải tạo thế giới”.</p>
+                <p>Trước C.Mác, các nhà tư tưởng, nhà triết học chỉ giải thích bằng nhiều cách khác nhau về xã hội mà chưa chỉ ra được cơ sở khoa học của sự vận động và phát triển. Triết học Mác - Lênin đã cung cấp cho nhân loại những công cụ vừa “nhận thức” thế giới vừa “cải tạo” thế giới, đó là hệ thống khái niệm, các cặp phạm trù và những quy luật của tự nhiên, xã hội và tư duy. Đặc biệt là quy luật nhận thức sự vận động và phát triển của xã hội. Đây thực chất là một cuộc cách mạng trong triết học, cho phép con người hiểu đúng và đi sâu nắm bắt được bản chất của thế giới, giúp cho quá trình cải tạo thực tiễn hiệu quả hơn.</p>
+                <figure class="my-4">
+                     <img src="https://placehold.co/800x450/59402d/f4f1ea?text=Marx+-+Engels+-+Lenin" alt="Chân dung V.I. Lê-nin, Ăng - Ghen, Các - Mác" class="mx-auto rounded-lg shadow-md">
+                    <figcaption class="text-center text-sm mt-2 text-gray-500">Chân dung V.I. Lê-nin, Ăng - Ghen, Các - Mác (Nguồn: Ban Tuyên giáo và Dân vận tỉnh ủy Tuyên Quang)</figcaption>
+                </figure>
+<p>Công cuộc đổi mới của Việt Nam được khởi xướng từ Đại hội Đảng toàn quốc lần thứ VI năm 1986, đến nay đã đi được hành trình hơn 30 năm và trải qua 7 kì Đại hội. Hơn 3 thập kỉ qua, Việt Nam đã viết nên câu chuyện thành công về những kì tích trong các lĩnh vực kinh tế, chính trị, văn hóa - xã hội. Không có đổi mới, sẽ không có Việt Nam với diện mạo như ngày nay. Ý nghĩa, tầm vóc và ý nghĩa cách mạng của đổi mới được Đảng khẳng định: “… đổi mới mang tầm vóc và ý nghĩa cách mạng, là quá trình cải biến sâu sắc, toàn diện, triệt để, là sự nghiệp cách mạng to lớn của toàn Đảng, toàn dân vì mục tiêu “dân giàu, nước mạnh, dân chủ, công bằng, văn minh”. Từ một đất nước nghèo và kém phát triển, đến nay, “Đất nước ra khỏi khủng hoảng kinh tế - xã hội và tình trạng kém phát triển, trở thành nước đang phát triển có thu nhập trung bình, đang đẩy mạnh công nghiệp hóa, hiện đại hóa và hội nhập quốc tế. Kinh tế tăng trưởng khá, nền kinh tế thị trường định hướng xã hội chủ nghĩa từng bước hình thành, phát triển. Chính trị - xã hội ổn định; quốc phòng, an ninh được tăng cường. Văn hóa - xã hội có bước phát triển; bộ mặt đất nước và đời sống của nhân dân có nhiều thay đổi”.</p>
+                 <figure class="my-4">
+                     <img src="https://placehold.co/800x450/ac541c/f4f1ea?text=Dai+hoi+VI+(1986)" alt="Đại hội Đảng lần thứ VI - 1986" class="mx-auto rounded-lg shadow-md">
+                    <figcaption class="text-center text-sm mt-2 text-gray-500">Đại hội Đại biểu Toàn quốc Đảng Cộng sản Việt Nam lần thứ VI - năm 1986 (Nguồn: Đài Truyền hình Việt Nam)</figcaption>
+                </figure>
+<p>Bên cạnh những thành tựu đạt được trong lĩnh vực kinh tế, chính trị, văn hóa - xã hội; đổi mới đã làm sáng tỏ, bổ sung và phát triển được rất nhiều vấn đề của lí luận. Đây là những vấn đề mới, nảy sinh từ thực tiễn Việt Nam. Thứ nhất, hoàn thiện những đặc trưng cơ bản của chủ nghĩa xã hội. Ở Đại hội VII năm 1991, chủ nghĩa xã hội có 6 đặc trưng đến Đại hội IX năm 2001, đã bổ sung thêm hai đặc trưng. Hiện nay, chủ nghĩa xã hội của nước ta gồm 8 đặc trưng cơ bản. Thứ hai, xây dựng, phát triển và hoàn thiện thể chế kinh tế thị trường định hướng xã hội chủ nghĩa. Đây là mô hình kinh tế đặc biệt vừa tuân theo quy luật của thị trường vừa có sự quản lí của nhà nước, bảo đảm không bị chệch hướng xã hội chủ nghĩa. Thứ ba, xây dựng nhà nước pháp quyền xã hội chủ nghĩa. Thứ tư, xây dựng nền văn hóa tiên tiến, đậm đà bản sắc dân tộc. Thực chất, những vấn đề lí luận trên vừa “mới” vừa “không mới”. Là học thuyết khoa học, cách mạng, chủ nghĩa Mác - Lênin đã sớm dự báo khả năng phát triển của mô hình chủ nghĩa xã hội, chủ nghĩa cộng sản với những vấn đề kinh tế, chính trị - văn hóa, xã hội được trình bày trong các tác phẩm viết vào thời kì khác nhau.</p>
+                 <figure class="my-4">
+                     <img src="https://placehold.co/800x450/86623e/f4f1ea?text=Bac+Ho+voi+dong+bao" alt="Bác Hồ với đồng bào các dân tộc Việt Nam" class="mx-auto rounded-lg shadow-md">
+                    <figcaption class="text-center text-sm mt-2 text-gray-500">Bác Hồ với đồng bào các dân tộc Việt Nam (tranh lụa của họa sĩ Trần Minh Thái)</figcaption>
+                </figure>
+                <p class="border-l-4 border-[#ac541c] pl-4 italic">Nhà nghiên cứu Nguyễn Thế Nghĩa và Thái Thị Thu Hương đã khẳng định: “Sự nghiệp đổi mới ở Việt Nam không chỉ dựa trên một cơ sở vật chất dồi dào, một nguồn nhân lực đông đảo, mà còn phải được đảm bảo rằng bằng một thế giới quan và phương pháp luận khoa học. Không có sự đảm bảo này thì đổi mới có nguy cơ bị chệch hướng, phải trả giá đắt, thậm chí có thể thất bại”.</p>
+             </section>
+        </main>
+    </div>
+
+    <!-- =========== FOOTER (PHỤ LỤC) =========== -->
+    <div class="bg-[#59402d] text-gray-300 w-full py-12">
+        <div class="container mx-auto px-4 animated-item">
+            <footer class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-left text-sm">
+                <div class="md:col-span-1">
+                    <div class="text-sm text-gray-400 font-semibold">
+                        <p>MLN111 - SE1708 - ThuyHTV</p>
+                        <p>do nhóm 1 thực hiện</p>
+                    </div>
+                </div>
+<div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <div>
+                        <h2 class="text-xl font-bold text-white mb-4">Phụ lục các mục</h2>
+                         <ul class="space-y-2 text-gray-400">
+                            <li><strong class="text-gray-200">Trang chủ:</strong> Tổng quan và sơ lược.</li>
+                            <li><strong class="text-gray-200">Nội dung:</strong> Lịch sử, Vai trò Nền tảng và Vai trò trong CĐS.</li>
+                            <li><strong class="text-gray-200">Quiz:</strong> Bài trắc nghiệm củng cố kiến thức.</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h2 class="text-xl font-bold text-white mb-4">Phụ lục AI</h2>
+                        <p class="text-gray-400">Trang web này được xây dựng với sự hỗ trợ của AI để tổng hợp, cấu trúc nội dung và tạo mã nguồn.</p>
+                    </div>
+                </div>
+            </footer>
+            <div class="text-left max-w-6xl mx-auto mt-8 text-gray-500 text-sm">
+                 <p>&copy; 2025. Nội dung tổng hợp từ tài liệu học tập.</p>
+            </div>
+        </div>
+    </div>
+    
+    <button id="to-top-button" title="Go To Top" class="hidden fixed z-50 bottom-10 right-10 p-4 border-0 w-14 h-14 rounded-full shadow-md bg-[#ac541c] hover:bg-[#86623e] text-white text-lg font-semibold transition-opacity duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 4l8 8h-6v8h-4v-8H4l8-8z" /></svg>
+    </button>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.animated-item').forEach(el => observer.observe(el));
+            
+            // Scroll-to-top button
+            const toTopButton = document.getElementById('to-top-button');
+            if (toTopButton) {
+                window.onscroll = () => {
+                    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                        toTopButton.classList.remove('hidden');
+                    } else {
+                        toTopButton.classList.add('hidden');
+                    }
+                };
+                toTopButton.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>

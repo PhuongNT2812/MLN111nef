@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRANG QUẢN LÍ HỆ THỐNG THI TRẮC NGHIỆM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-btn.active { border-color: #3b82f6; background-color: #eff6ff; color: #3b82f6; }
+        .view { display: none; }
+        .view.active { display: block; }
+        .modal { display: none; }
+        .modal.active { display: flex; }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- MÀN HÌNH ĐĂNG NHẬP -->
+    <div id="admin-login-screen" class="flex items-center justify-center min-h-screen">
+        <div class="text-center p-8 bg-white rounded-xl shadow-lg">
+            <h1 class="text-3xl font-bold text-gray-800">Trang Quản Trị</h1>
+            <p class="text-gray-500 mt-2 mb-8">Vui lòng đăng nhập để tiếp tục.</p>
+            <button id="google-login-btn" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 flex items-center mx-auto">
+                <svg class="w-6 h-6 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C12.955 4 4 12.955 4 24s8.955 20 20 20s20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691c-1.563 3.166-2.306 6.753-2.306 10.309s.743 7.143 2.306 10.309l7.37-5.742C13.091 26.627 13 25.338 13 24s.091-2.627.676-4.258l-7.37-5.742z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083L43.59 20H24v8h11.303a12.03 12.03 0 0 1-5.293 7.657l6.19 5.238C42.012 37.06 44 30.926 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+                Đăng nhập với Google
+            </button>
+            <p id="auth-error" class="text-red-500 mt-4 font-semibold hidden"></p>
+        </div>
+    </div>
+
+    <!-- BẢNG ĐIỀU KHIỂN CHÍNH -->
+    <div id="dashboard" class="hidden container mx-auto p-4 md:p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Bảng Điều Khiển</h1>
+            <div>
+                <span id="admin-email" class="text-gray-600 mr-4"></span>
+                <button id="logout-btn" class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600">Đăng xuất</button>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="mb-6 border-b border-gray-200">
+            <nav class="-mb-px flex space-x-6" id="tabs">
+                <button data-view="results-view" class="tab-btn py-4 px-1 border-b-2 font-medium text-lg leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none">Kết quả thi</button>
+                <button data-view="exams-view" class="tab-btn py-4 px-1 border-b-2 font-medium text-lg leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none">Quản lý Đề thi</button>
+                <button data-view="students-view" class="tab-btn py-4 px-1 border-b-2 font-medium text-lg leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none">Quản lý Thí sinh</button>
+                <button id="admin-tab" data-view="admins-view" class="tab-btn py-4 px-1 border-b-2 font-medium text-lg leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none">Quản lý Admin</button>
+            </nav>
+        </div>
+
+        <!-- VIEW: KẾT QUẢ THI -->
+        <div id="results-view" class="view">
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Lịch sử thi</h2>
+                <div class="flex gap-4 mb-4">
+                    <input type="text" id="filter-student" placeholder="Lọc theo tên hoặc mã thí sinh..." class="w-full px-3 py-2 border rounded-md">
+                    <input type="text" id="filter-exam" placeholder="Lọc theo mã đề..." class="w-full px-3 py-2 border rounded-md">
+                </div>
+                <table class="w-full text-left">
+                    <thead><tr class="border-b"><th class="py-2">Thí sinh</th><th class="py-2">Mã đề</th><th class="py-2">Điểm</th><th class="py-2">Ngày thi</th></tr></thead>
+                    <tbody id="results-table-body"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- VIEW: QUẢN LÝ ĐỀ THI -->
+        <div id="exams-view" class="view">
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-800">Danh sách đề thi</h2>
+                    <button id="show-exam-modal-btn" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600">Tạo đề mới</button>
+                </div>
+                <table class="w-full text-left">
+                    <thead><tr class="border-b"><th class="py-2">Mã đề</th><th class="py-2">Tên môn</th><th class="py-2">Số câu</th><th class="py-2">Hành động</th></tr></thead>
+                    <tbody id="exams-table-body"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- VIEW: QUẢN LÝ THÍ SINH -->
+        <div id="students-view" class="view">
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                 <h2 class="text-2xl font-bold text-gray-800 mb-4">Quản lý Thí sinh</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-semibold mb-2">Thêm thủ công</h3>
+                        <div class="flex gap-2 mb-4">
+                            <input id="student-id" type="text" placeholder="Mã thí sinh" class="w-full px-3 py-2 border rounded-md">
+                            <input id="student-name" type="text" placeholder="Họ và tên" class="w-full px-3 py-2 border rounded-md">
+                            <button id="add-student-btn" class="bg-blue-500 text-white font-semibold px-4 rounded-md hover:bg-blue-600">Thêm</button>
+                        </div>
+                        <h3 class="font-semibold mb-2">Import từ file (.xlsx, .csv, .txt)</h3>
+                        <p class="text-sm text-gray-500 mb-2">Định dạng: `Mã số,Tên thí sinh` mỗi dòng.</p>
+                        <input id="import-student-file" type="file" accept=".xlsx, .csv, .txt">
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Danh sách thí sinh</h3>
+                        <ul id="student-list" class="space-y-2 max-h-96 overflow-y-auto"></ul>
+                    </div>
+                 </div>
+            </div>
+        </div>
+
+        <!-- VIEW: QUẢN LÝ ADMIN -->
+        <div id="admins-view" class="view">
+             <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Quản lý người dùng có quyền</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-semibold mb-2">Thêm người dùng mới</h3>
+                        <div class="flex gap-2">
+                            <input id="new-admin-email" type="email" placeholder="Email người dùng" class="w-full px-3 py-2 border rounded-md">
+                            <select id="new-admin-role" class="border rounded-md px-2">
+                                <option value="moderator">Người kiểm duyệt</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                            <button id="add-admin-btn" class="bg-purple-500 text-white font-semibold px-4 rounded-md hover:bg-purple-600">Thêm</button>
+                        </div>
+                    </div>
+                     <div>
+                        <h3 class="font-semibold mb-2">Danh sách người dùng</h3>
+                        <ul id="admin-list" class="space-y-2"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: TẠO/SỬA ĐỀ THI -->
+    <div id="exam-modal" class="modal fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full items-center justify-center">
+        <div class="relative mx-auto p-5 border w-full max-w-4xl shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <h3 id="modal-title" class="text-2xl leading-6 font-bold text-gray-900 mb-4">Tạo Đề Thi Mới</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Cột thông tin đề thi -->
+                    <div>
+                        <label class="font-semibold">Mã đề thi</label>
+                        <input id="exam-code" type="text" placeholder="vd: PRJ311" class="w-full mt-1 mb-3 px-3 py-2 border rounded-md">
+                        
+                        <label class="font-semibold">Tên môn học</label>
+                        <input id="exam-title" type="text" placeholder="Lập trình Java" class="w-full mt-1 mb-3 px-3 py-2 border rounded-md">
+
+                        <label class="font-semibold">Thời gian (phút)</label>
+                        <input id="exam-duration" type="number" placeholder="45" class="w-full mt-1 mb-3 px-3 py-2 border rounded-md">
+                        
+                        <div class="flex items-center gap-4 mb-4">
+                            <label class="flex items-center"><input id="shuffle-questions" type="checkbox" class="mr-2 h-4 w-4"> Trộn câu hỏi</label>
+                            <label class="flex items-center"><input id="shuffle-answers" type="checkbox" class="mr-2 h-4 w-4"> Trộn đáp án</label>
+                        </div>
+                        
+                        <h4 class="font-semibold mb-2">Import câu hỏi từ file</h4>
+                        <input id="import-exam-file" type="file" accept=".xlsx, .csv, .txt">
+                        <p class="text-xs text-gray-500 mt-1">Excel: Cột A: Câu hỏi, B-E: Đáp án, F: Đáp án đúng.</p>
+                    </div>
+                    <!-- Cột nhập câu hỏi -->
+                    <div>
+                        <label class="font-semibold">Soạn câu hỏi thủ công</label>
+                        <textarea id="exam-questions-manual" rows="12" placeholder="Định dạng: # Câu hỏi ... * Đáp án đúng ... - Đáp án sai ..." class="w-full mt-1 p-3 border rounded-md"></textarea>
+                    </div>
+                </div>
+                <div class="items-center px-4 py-3 mt-4 gap-4 flex justify-end">
+                    <button id="close-exam-modal-btn" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Hủy</button>
+                    <button id="save-exam-btn" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 font-semibold">Lưu Đề Thi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module">
+        // --- Firebase Imports ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, doc, setDoc, writeBatch, collection, query, where, getDocs, addDoc, onSnapshot, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // --- Firebase Config ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyDG_7j_aXI9kp5C_hVxuOUhA7dMb_XY8ck",
+            authDomain: "httn-tf-01.firebaseapp.com",
+            projectId: "httn-tf-01",
+            storageBucket: "httn-tf-01.firebasestorage.app",
+            messagingSenderId: "952866478297",
+            appId: "1:952866478297:web:9a9ca4124ed5e8d99106c8",
+            measurementId: "G-EREBQ1LNSG"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app';
+
+        // --- DOM Elements ---
+        const loginScreen = document.getElementById('admin-login-screen');
+        const dashboard = document.getElementById('dashboard');
+        const googleLoginBtn = document.getElementById('google-login-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const adminEmailEl = document.getElementById('admin-email');
+        const authErrorEl = document.getElementById('auth-error');
+        const tabs = document.getElementById('tabs');
+        const views = document.querySelectorAll('.view');
+        const adminTab = document.getElementById('admin-tab');
+
+        // --- App State ---
+        let currentEditingExamId = null;
+
+        // --- Navigation ---
+        tabs.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                const viewId = e.target.dataset.view;
+                showView(viewId);
+            }
+        });
+
+        function showView(viewId) {
+            views.forEach(view => view.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            tabs.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            tabs.querySelector(`[data-view="${viewId}"]`).classList.add('active');
+        }
+
+        // --- Authentication & Authorization ---
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const userRole = await checkUserRole(user.email);
+                if (userRole) {
+                    loginScreen.classList.add('hidden');
+                    dashboard.classList.remove('hidden');
+                    adminEmailEl.textContent = `${user.email} (${userRole})`;
+                    showView('results-view'); // Default view
+                    
+                    if (userRole === 'admin') {
+                        adminTab.style.display = 'block';
+                        listenForAdmins();
+                    } else {
+                        adminTab.style.display = 'none';
+                    }
+                    // Initialize data listeners
+                    listenForResults();
+                    listenForExams();
+                    listenForStudents();
+                } else {
+                    authErrorEl.textContent = "Bạn không có quyền truy cập trang này.";
+                    authErrorEl.classList.remove('hidden');
+                    await signOut(auth);
+                }
+            } else {
+                loginScreen.classList.remove('hidden');
+                dashboard.classList.add('hidden');
+            }
+        });
+        
+        googleLoginBtn.addEventListener('click', () => {
+            signInWithPopup(auth, new GoogleAuthProvider()).catch(error => console.error("Lỗi đăng nhập Google:", error));
+        });
+        logoutBtn.addEventListener('click', () => signOut(auth));
+
+        async function checkUserRole(email) {
+            try {
+                const q = query(collection(db, `artifacts/${appId}/public/data/admins`), where("email", "==", email));
+                const querySnapshot = await getDocs(q);
+                return querySnapshot.empty ? null : querySnapshot.docs[0].data().role;
+            } catch (error) {
+                console.error("Lỗi kiểm tra quyền:", error);
+                return null;
+            }
+        }
+
+        // --- Results View ---
+        const resultsTableBody = document.getElementById('results-table-body');
+        const filterStudent = document.getElementById('filter-student');
+        const filterExam = document.getElementById('filter-exam');
+        let allResults = [];
+
+        function listenForResults() {
+            const resultsRef = collection(db, `artifacts/${appId}/public/data/results`);
+            onSnapshot(resultsRef, (snapshot) => {
+                allResults = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                allResults.sort((a, b) => b.submittedAt.toMillis() - a.submittedAt.toMillis());
+                renderResults();
+            });
+        }
+
+        function renderResults() {
+            const studentFilter = filterStudent.value.toLowerCase();
+            const examFilter = filterExam.value.toLowerCase();
+            
+            const filteredResults = allResults.filter(r => {
+                const studentMatch = r.userName.toLowerCase().includes(studentFilter) || r.userId.toLowerCase().includes(studentFilter);
+                const examMatch = r.examCode.toLowerCase().includes(examFilter);
+                return studentMatch && examMatch;
+            });
+
+            resultsTableBody.innerHTML = '';
+            if (filteredResults.length === 0) {
+                resultsTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-4 text-gray-500">Không tìm thấy kết quả.</td></tr>';
+                return;
+            }
+            filteredResults.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b';
+                tr.innerHTML = `
+                    <td class="py-3">${r.userName} (${r.userId})</td>
+                    <td>${r.examCode}</td>
+                    <td class="font-bold">${r.score}%</td>
+                    <td>${r.submittedAt.toDate().toLocaleString('vi-VN')}</td>
+                `;
+                resultsTableBody.appendChild(tr);
+            });
+        }
+        filterStudent.addEventListener('input', renderResults);
+        filterExam.addEventListener('input', renderResults);
+
+        // --- Exam Management ---
+        const examsTableBody = document.getElementById('exams-table-body');
+        const examModal = document.getElementById('exam-modal');
+        const modalTitle = document.getElementById('modal-title');
+        
+        document.getElementById('show-exam-modal-btn').addEventListener('click', () => openExamModal());
+        document.getElementById('close-exam-modal-btn').addEventListener('click', () => examModal.classList.remove('active'));
+        document.getElementById('save-exam-btn').addEventListener('click', handleSaveExam);
+
+        function listenForExams() {
+            const examsRef = collection(db, `artifacts/${appId}/public/data/exams`);
+            onSnapshot(examsRef, (snapshot) => {
+                examsTableBody.innerHTML = '';
+                snapshot.forEach(doc => {
+                    const exam = doc.data();
+                    const tr = document.createElement('tr');
+                    tr.className = 'border-b';
+                    tr.innerHTML = `
+                        <td class="py-3 font-medium">${doc.id}</td>
+                        <td>${exam.title}</td>
+                        <td>${exam.questions.length}</td>
+                        <td class="space-x-2">
+                            <button data-id="${doc.id}" class="edit-exam-btn text-blue-500 hover:underline">Sửa</button>
+                            <button data-id="${doc.id}" class="delete-exam-btn text-red-500 hover:underline">Xóa</button>
+                        </td>
+                    `;
+                    examsTableBody.appendChild(tr);
+                });
+                // Add event listeners for new buttons
+                examsTableBody.querySelectorAll('.edit-exam-btn').forEach(btn => btn.addEventListener('click', (e) => openExamModal(e.target.dataset.id)));
+                examsTableBody.querySelectorAll('.delete-exam-btn').forEach(btn => btn.addEventListener('click', handleDeleteExam));
+            });
+        }
+
+        async function openExamModal(examId = null) {
+            // Reset form
+            document.getElementById('exam-form').reset();
+            currentEditingExamId = examId;
+            if (examId) {
+                modalTitle.textContent = 'Chỉnh Sửa Đề Thi';
+                const examRef = doc(db, `artifacts/${appId}/public/data/exams`, examId);
+                const docSnap = await getDoc(examRef);
+                if (docSnap.exists()) {
+                    const exam = docSnap.data();
+                    document.getElementById('exam-code').value = examId;
+                    document.getElementById('exam-code').disabled = true;
+                    document.getElementById('exam-title').value = exam.title;
+                    document.getElementById('exam-duration').value = exam.durationMinutes;
+                    document.getElementById('shuffle-questions').checked = exam.shuffleQuestions;
+                    document.getElementById('shuffle-answers').checked = exam.shuffleAnswers;
+                    document.getElementById('exam-questions-manual').value = questionsToText(exam.questions);
+                }
+            } else {
+                modalTitle.textContent = 'Tạo Đề Thi Mới';
+                document.getElementById('exam-code').disabled = false;
+            }
+            examModal.classList.add('active');
+        }
+
+        async function handleSaveExam() {
+            const examCode = document.getElementById('exam-code').value.trim();
+            const examTitle = document.getElementById('exam-title').value.trim();
+            const duration = parseInt(document.getElementById('exam-duration').value);
+            const rawQuestions = document.getElementById('exam-questions-manual').value;
+
+            if (!examCode || !examTitle || !duration) {
+                alert("Vui lòng điền đủ Mã đề, Tên môn và Thời gian.");
+                return;
+            }
+            const questions = parseTextToQuestions(rawQuestions);
+            if (questions.length === 0) {
+                alert("Chưa có câu hỏi nào hoặc định dạng câu hỏi không hợp lệ.");
+                return;
+            }
+            
+            const examData = {
+                title: examTitle,
+                durationMinutes: duration,
+                shuffleQuestions: document.getElementById('shuffle-questions').checked,
+                shuffleAnswers: document.getElementById('shuffle-answers').checked,
+                questions: questions
+            };
+
+            try {
+                const examRef = doc(db, `artifacts/${appId}/public/data/exams`, examCode);
+                await setDoc(examRef, examData);
+                alert(`Đã lưu thành công đề thi "${examTitle}".`);
+                examModal.classList.remove('active');
+            } catch (error) {
+                alert("Lỗi khi lưu đề thi: " + error.message);
+            }
+        }
+        
+        async function handleDeleteExam(e) {
+            const examId = e.target.dataset.id;
+            if (confirm(`Bạn có chắc muốn xóa vĩnh viễn đề thi "${examId}"?`)) {
+                try {
+                    await deleteDoc(doc(db, `artifacts/${appId}/public/data/exams`, examId));
+                    alert("Đã xóa thành công.");
+                } catch (error) {
+                    alert("Lỗi khi xóa: " + error.message);
+                }
+            }
+        }
+        
+        document.getElementById('import-exam-file').addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const data = e.target.result;
+                let questions = [];
+                if (file.name.endsWith('.xlsx')) {
+                    const workbook = XLSX.read(data, { type: 'binary' });
+                    const sheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[sheetName];
+                    const json = XLSX.utils.sheet_to_json(worksheet);
+                    json.forEach(row => {
+                        const questionText = row['Câu hỏi'];
+                        const options = [row['Đáp án A'], row['Đáp án B'], row['Đáp án C'], row['Đáp án D']].filter(Boolean);
+                        const answer = row['Đáp án đúng'];
+                        if(questionText && options.length > 1 && answer) {
+                            questions.push({ question: questionText, options, answer, image: null });
+                        }
+                    });
+                } else { // TXT
+                    questions = parseTextToQuestions(data);
+                }
+                if (questions.length > 0) {
+                    document.getElementById('exam-questions-manual').value = questionsToText(questions);
+                    alert(`Đã import ${questions.length} câu hỏi. Nhấn "Lưu Đề Thi" để hoàn tất.`);
+                } else {
+                    alert("Không thể phân tích câu hỏi từ file.");
+                }
+            };
+            if (file.name.endsWith('.xlsx')) reader.readAsBinaryString(file);
+            else reader.readAsText(file);
+        });
+
+        function parseTextToQuestions(text) {
+            const questions = [];
+            const questionBlocks = text.split('#').filter(q => q.trim() !== '');
+            questionBlocks.forEach(block => {
+                const lines = block.trim().split('\n');
+                const questionText = lines.shift().trim();
+                const options = [];
+                let answer = '';
+                lines.forEach(line => {
+                    const optionText = line.substring(1).trim();
+                    options.push(optionText);
+                    if (line.startsWith('*')) answer = optionText;
+                });
+                if (questionText && options.length > 1 && answer) {
+                    questions.push({ question: questionText, options, answer, image: null });
+                }
+            });
+            return questions;
+        }
+
+        function questionsToText(questions) {
+            return questions.map(q => {
+                let text = `# ${q.question}\n`;
+                text += q.options.map(opt => `${opt === q.answer ? '*' : '-'} ${opt}`).join('\n');
+                return text;
+            }).join('\n\n');
+        }
+
+        // --- Student Management ---
+        const studentListEl = document.getElementById('student-list');
+        const addStudentBtn = document.getElementById('add-student-btn');
+        const importStudentFile = document.getElementById('import-student-file');
+
+        function listenForStudents() {
+            const studentsRef = collection(db, `artifacts/${appId}/public/data/users`);
+            onSnapshot(studentsRef, (snapshot) => {
+                studentListEl.innerHTML = '';
+                snapshot.forEach(doc => {
+                    const li = document.createElement('li');
+                    li.className = 'flex justify-between items-center p-2 bg-gray-50 rounded';
+                    li.innerHTML = `<span>${doc.data().name}</span><span class="text-sm text-gray-500 font-mono">${doc.id}</span>`;
+                    studentListEl.appendChild(li);
+                });
+            });
+        }
+        
+        addStudentBtn.addEventListener('click', async () => {
+             const studentId = document.getElementById('student-id').value.trim();
+            const studentName = document.getElementById('student-name').value.trim();
+            if (!studentId || !studentName) {
+                alert("Vui lòng nhập đủ Mã và Tên thí sinh.");
+                return;
+            }
+            try {
+                await setDoc(doc(db, `artifacts/${appId}/public/data/users`, studentId), { name: studentName });
+                alert(`Đã thêm thí sinh: ${studentName}`);
+                document.getElementById('student-id').value = '';
+                document.getElementById('student-name').value = '';
+            } catch (error) {
+                alert("Lỗi khi thêm: " + error.message);
+            }
+        });
+
+        importStudentFile.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const data = e.target.result;
+                const students = [];
+                if (file.name.endsWith('.xlsx')) {
+                    const workbook = XLSX.read(data, { type: 'binary' });
+                    const json = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], { header: 1 });
+                    json.forEach(row => {
+                        if (row[0] && row[1]) students.push({ id: String(row[0]).trim(), name: String(row[1]).trim() });
+                    });
+                } else {
+                    data.split(/\r?\n/).forEach(line => {
+                        const parts = line.split(',');
+                        if (parts[0] && parts[1]) students.push({ id: parts[0].trim(), name: parts[1].trim() });
+                    });
+                }
+                
+                if (students.length > 0 && confirm(`Tìm thấy ${students.length} thí sinh. Bạn có muốn import không?`)) {
+                    const batch = writeBatch(db);
+                    students.forEach(s => batch.set(doc(db, `artifacts/${appId}/public/data/users`, s.id), { name: s.name }));
+                    await batch.commit();
+                    alert(`Đã import thành công ${students.length} thí sinh.`);
+                } else {
+                    alert("Không tìm thấy dữ liệu hợp lệ hoặc đã hủy.");
+                }
+            };
+            if (file.name.endsWith('.xlsx')) reader.readAsBinaryString(file);
+            else reader.readAsText(file);
+        });
+
+        // --- Admin Role Management ---
+        const addAdminBtn = document.getElementById('add-admin-btn');
+        
+        addAdminBtn.addEventListener('click', async () => {
+            const newAdminEmail = document.getElementById('new-admin-email').value.trim();
+            const newAdminRole = document.getElementById('new-admin-role').value;
+            if (!newAdminEmail) {
+                alert("Vui lòng nhập email.");
+                return;
+            }
+            try {
+                if (await checkUserRole(newAdminEmail)) {
+                    alert("Email này đã có quyền trong hệ thống.");
+                    return;
+                }
+                await addDoc(collection(db, `artifacts/${appId}/public/data/admins`), { email: newAdminEmail, role: newAdminRole });
+                alert(`Đã thêm ${newAdminEmail} với vai trò ${newAdminRole}.`);
+                document.getElementById('new-admin-email').value = '';
+            } catch (error) {
+                alert("Lỗi khi thêm người dùng: " + error.message);
+            }
+        });
+
+        function listenForAdmins() {
+            const adminsRef = collection(db, `artifacts/${appId}/public/data/admins`);
+            onSnapshot(adminsRef, (snapshot) => {
+                adminListEl.innerHTML = '';
+                snapshot.forEach(docSnap => {
+                    const admin = docSnap.data();
+                    const li = document.createElement('li');
+                    li.className = 'flex justify-between items-center p-2 bg-gray-50 rounded';
+                    li.innerHTML = `
+                        <div><p class="font-medium">${admin.email}</p><p class="text-sm text-gray-500 capitalize">${admin.role}</p></div>
+                        <button data-id="${docSnap.id}" class="delete-admin-btn text-red-500 hover:text-red-700 font-semibold">Xóa</button>
+                    `;
+                    adminListEl.appendChild(li);
+                });
+                
+                adminListEl.querySelectorAll('.delete-admin-btn').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        if (confirm("Bạn có chắc muốn xóa người dùng này?")) {
+                            await deleteDoc(doc(db, `artifacts/${appId}/public/data/admins`, e.target.dataset.id));
+                            alert("Đã xóa thành công.");
+                        }
+                    });
+                });
+            });
+        }
+    </script>
+</body>
+</html>

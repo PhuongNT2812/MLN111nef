@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ - Triết Học Mác - Lênin & Chuyển Đổi Số</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f1ea; 
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #ac541c, #86623e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .animated-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animated-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-[#59402d]">
+
+    <!-- =========== HEADER VÀ MENU MỚI =========== -->
+    <header class="sticky top-0 z-30 bg-[#ac541c] text-white shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/gJZG2nXW/image-removebg-preview.png" alt="NƯỚC CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM MUÔN NĂM!" class="h-10">
+            </a>
+            <nav class="flex items-center space-x-4 font-semibold">
+                <a href="index.html" class="px-3 py-2 hover:bg-black/10 rounded-md transition-colors">Trang chủ</a>
+                <div x-data="{ open: false }" @mouseleave="open = false" class="relative">
+                    <a @mouseover="open = true" href="#" class="px-3 py-2 hover:bg-black/10 rounded-md transition-colors flex items-center">
+                        Nội dung
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div x-show="open" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-1000"
+x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-xl text-[#59402d]">
+                        <a href="history.html" class="block px-4 py-3 text-sm hover:bg-[#f4f1ea] transition-colors">Lịch sử Triết học Mác - Lênin</a>
+                        <a href="platform_role.html" class="block px-4 py-3 text-sm hover:bg-[#f4f1ea] transition-colors">Vai trò nền tảng</a>
+                        <a href="digital_role.html" class="block px-4 py-3 text-sm hover:bg-[#f4f1ea] transition-colors">Vai trò trong Chuyển đổi số</a>
+                    </div>
+                </div>
+                <a href="quiz.html" class="px-3 py-2 hover:bg-black/10 rounded-md transition-colors">Quiz</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- =========== NỘI DUNG TRANG CHỦ =========== -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vai trò của Triết học Mác - Lênin trong Đời sống và Sự nghiệp Đổi mới</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Modern Heritage -->
+    <!-- Application Structure Plan: Ứng dụng được tái cấu trúc thành một trang tổng quan, tường thuật theo dòng chảy lịch sử và lý luận. Bắt đầu với (1) Khái quát Lịch sử để tạo bối cảnh, tiếp theo là (2) Sơ đồ trực quan về Quá trình Đổi mới để hệ thống hóa các mốc quan trọng. Sau đó, trang đi sâu vào (3) Phân tích vai trò nền tảng trong Đổi mới và (4) Vai trò đặc biệt trong Chuyển đổi số. Cấu trúc này chuyển đổi một bài luận dài thành một trải nghiệm web có tổ chức, đa phương tiện và dễ tiếp cận, giúp người dùng nắm bắt thông tin một cách có hệ thống. -->
+    <!-- Visualization & Content Choices: 1. Sơ đồ quá trình Đổi mới -> Dòng thời gian (Timeline) tương tác (HTML/CSS) -> Trực quan hóa các mốc lịch sử quan trọng, đáp ứng yêu cầu cụ thể của người dùng. 2. Hình ảnh & Trích dẫn -> Bố cục đa phương tiện (HTML/Tailwind) -> Tích hợp hình ảnh và trích dẫn vào dòng văn bản để tăng tính hấp dẫn và minh họa. 3. Phân tích vai trò -> Bố cục thẻ và tab (HTML/JS) -> Phân chia các luận điểm phức tạp thành các phần nhỏ, dễ hiểu. 4. Dữ liệu kinh tế -> Biểu đồ đường GDP (Chart.js) -> Cung cấp bằng chứng định lượng cho sự thành công của Đổi mới. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .tab-button.active {
+            border-color: #c0392b;
+            color: #c0392b;
+            background-color: #fef5f4;
+        }
+        .chart-container {
+            position: relative;
+            height: 45vh;
+            max-height: 450px;
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+
+    <main>
+        <section id="hero" class="py-20 md:py-28 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tight gradient-text">TRIẾT HỌC MÁC - LÊNIN</h2>
+                <p class="mt-6 text-lg text-gray-600">Phân tích vai trò của Triết học Mác - Lênin trong Đời sống xã hội và sự nghiệp đổi mới, đặc biệt là nhiệm vụ chuyển đổi số ở Việt Nam hiện nay.</p>
+            </div>
+        </section>
+
+        <section id="history" class="py-16 md:py-24 section-fade-in">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-center mb-12">I. Khái quát Lịch sử Triết học và công cuộc đổi mới đất nước</h2>
+                <div class="space-y-8 text-gray-700 leading-relaxed">
+<p>Chủ nghĩa Mác - Lênin ra đời vào những năm 40 của thế kỉ XIX, nhanh chóng trở thành vũ khí lí luận của giai cấp vô sản. Sự phát triển của nó đã mở ra thời kì quá độ từ chủ nghĩa tư bản lên chủ nghĩa xã hội. Bản chất khoa học, cách mạng và nhân văn đã tạo nên sức sống mãnh liệt mà chưa học thuyết nào vượt qua được.</p>
+                    
+                    <div class="md:flex md:items-start md:space-x-6">
+                        <div class="md:w-2/3">
+                             <p>Triết học Mác - Lênin nghiên cứu những quy luật chung nhất của tự nhiên, xã hội và tư duy. Trong tác phẩm Luận cương về Phoi - ơ - bắc, C.Mác khẳng định: “Các nhà triết học đã chỉ giải thích thế giới bằng nhiều cách khác nhau, song vấn đề là cải tạo thế giới”.</p>
+                             <p class="mt-4">Triết học Mác - Lênin đã cung cấp công cụ vừa “nhận thức” thế giới vừa “cải tạo” thế giới, cho phép con người hiểu đúng và nắm bắt bản chất của thế giới, giúp quá trình cải tạo thực tiễn hiệu quả hơn.</p>
+                        </div>
+                        <div class="md:w-1/3 mt-6 md:mt-0">
+                            <img src="https://i.postimg.cc/DfxxwBh7/image.png" alt="Chân dung Mác, Engels, Lênin" class="rounded-lg shadow-md">
+                            <p class="text-xs text-center mt-2 text-gray-500">Chân dung V.I. Lê-nin, Ăng - Ghen, Các - Mác</p>
+                        </div>
+                    </div>
+
+                    <blockquote class="border-l-4 border-[#c0392b] pl-6 py-2 my-8 text-gray-800 italic">
+                        <p>“… đổi mới mang tầm vóc và ý nghĩa cách mạng, là quá trình cải biến sâu sắc, toàn diện, triệt để, là sự nghiệp cách mạng to lớn của toàn Đảng, toàn dân vì mục tiêu “dân giàu, nước mạnh, dân chủ, công bằng, văn minh”.”</p>
+                        <cite class="block text-right mt-2 not-italic text-sm text-gray-600">— Đảng Cộng sản Việt Nam</cite>
+                    </blockquote>
+                    <p>Công cuộc đổi mới của Việt Nam khởi xướng từ Đại hội VI (1986) đã viết nên câu chuyện thành công kỳ diệu. Từ một đất nước nghèo, Việt Nam đã ra khỏi khủng hoảng, trở thành nước đang phát triển có thu nhập trung bình, đẩy mạnh công nghiệp hóa, hiện đại hóa và hội nhập quốc tế.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline" class="py-16 md:py-24 bg-white section-fade-in">
+             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-center mb-12">Sơ đồ quá trình đổi mới và phát triển Lý luận</h2>
+                <div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+<h3 class="text-lg font-semibold text-gray-800">Đại hội VI (1986)</h3>
+                        <p class="text-gray-600 mt-1">Khởi xướng đường lối Đổi mới toàn diện, một bước ngoặt lịch sử, tập trung vào đổi mới tư duy kinh tế.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h3 class="text-lg font-semibold text-gray-800">Đại hội VII (1991)</h3>
+                        <p class="text-gray-600 mt-1">Thông qua Cương lĩnh xây dựng đất nước trong thời kỳ quá độ lên CNXH, xác định 6 đặc trưng của mô hình.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h3 class="text-lg font-semibold text-gray-800">Đại hội IX (2001)</h3>
+                        <p class="text-gray-600 mt-1">Bổ sung, phát triển Cương lĩnh, làm rõ hơn con đường đi lên CNXH và hoàn thiện mô hình với 8 đặc trưng cơ bản.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h3 class="text-lg font-semibold text-gray-800">Hơn 4 thập kỷ đổi mới</h3>
+                        <p class="text-gray-600 mt-1">Việt Nam đạt được những thành tựu to lớn, có ý nghĩa lịch sử: kinh tế tăng trưởng khá, chính trị - xã hội ổn định, đời sống nhân dân cải thiện.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="renovation-role" class="py-16 md:py-24 section-fade-in">
+             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">II. Vai trò trong sự nghiệp đổi mới đất nước</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Thành công của công cuộc đổi mới là nhờ sự vận dụng sáng tạo chủ nghĩa Mác - Lênin. </p>
+                </div>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow border-t-4 border-red-600">
+                        <h3 class="text-lg font-semibold text-gray-800">1. Thế giới quan & Phương pháp luận</h3>
+                        <p class="mt-2 text-gray-600">Trang bị công cụ nhận thức khoa học, giúp khắc phục tư duy chủ quan, giáo điều và là cơ sở để chuyển đổi sang kinh tế thị trường định hướng XHCN.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow border-t-4 border-yellow-500">
+                        <h3 class="text-lg font-semibold text-gray-800">2. Tìm hiểu và phân tích xu hướng xã hội</h3>
+<p class="mt-2 text-gray-600">Giúp nhận thức vai trò của khoa học - công nghệ là lực lượng sản xuất trực tiếp, từ đó chủ động hội nhập và tiếp thu tinh hoa nhân loại.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow border-t-4 border-green-600">
+                        <h3 class="text-lg font-semibold text-gray-800">3. Cơ sở lý luận cho Đảng và Nhà nước</h3>
+                        <p class="mt-2 text-gray-600">Là nền tảng kiên định con đường xây dựng CNXH, khẳng định vai trò lãnh đạo của Đảng, giúp đất nước không chệch hướng trong phát triển.</p>
+                    </div>
+                </div>
+                <div class="mt-16">
+                    <div class="chart-container">
+                        <canvas id="gdpChart"></canvas>
+                    </div>
+                    <p class="text-center mt-4 text-sm text-gray-500">Biểu đồ minh họa tốc độ tăng trưởng GDP của Việt Nam qua các năm, thể hiện sự bứt phá từ sau Đổi mới.</p>
+                </div>
+             </div>
+        </section>
+
+        <section id="digital-age-role" class="py-16 md:py-24 bg-white section-fade-in">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center">
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Vai trò trong nhiệm vụ Chuyển đổi số</h2>
+                    <p class="mt-4 max-w-3xl text-lg text-gray-600 mx-auto">Đối mặt với thách thức và cơ hội của Cách mạng 4.0, triết học Mác - Lênin tiếp tục soi đường cho nhiệm vụ chuyển đổi số quốc gia.</p>
+                </div>
+                <div class="mt-12 max-w-4xl mx-auto">
+                    <div class="flex flex-wrap justify-center border-b border-gray-200">
+                        <button class="tab-button active py-3 px-6 text-sm font-medium border-b-2 border-transparent hover:text-[#c0392b] focus:outline-none" data-tab="1">Lấy người dân làm trung tâm</button>
+                        <button class="tab-button py-3 px-6 text-sm font-medium border-b-2 border-transparent hover:text-[#c0392b] focus:outline-none" data-tab="2">Giải quyết mâu thuẫn mới</button>
+                        <button class="tab-button py-3 px-6 text-sm font-medium border-b-2 border-transparent hover:text-[#c0392b] focus:outline-none" data-tab="3">Vai trò Nhà nước</button>
+                        <button class="tab-button py-3 px-6 text-sm font-medium border-b-2 border-transparent hover:text-[#c0392b] focus:outline-none" data-tab="4">Bảo vệ tư tưởng</button>
+                    </div>
+                    <div class="mt-8">
+                        <div class="tab-content" id="tab-content-1">
+<p class="text-gray-700 leading-relaxed">Quan điểm về vai trò sáng tạo lịch sử của quần chúng nhân dân là cơ sở để xác định chuyển đổi số phải vì con người, đảm bảo mọi người dân được hưởng lợi, không ai bị bỏ lại phía sau, thúc đẩy công bằng và tiến bộ xã hội.</p>
+                        </div>
+                        <div class="tab-content hidden" id="tab-content-2">
+                            <p class="text-gray-700 leading-relaxed">Phép biện chứng là công cụ để phân tích các mâu thuẫn mới như: phát triển kinh tế số vs. an ninh mạng (Luật An ninh mạng), tự do thông tin vs. trách nhiệm xã hội, tự động hóa vs. an sinh xã hội. Từ đó tìm ra giải pháp hài hòa, bền vững.</p>
+                        </div>
+                        <div class="tab-content hidden" id="tab-content-3">
+                            <p class="text-gray-700 leading-relaxed">Lý luận về nhà nước khẳng định vai trò kiến tạo, dẫn dắt của Nhà nước pháp quyền XHCN. Minh chứng là việc thành lập Ủy ban Quốc gia về Chuyển đổi số do Thủ tướng làm Chủ tịch để xây dựng chiến lược và định hướng toàn bộ quá trình.</p>
+                        </div>
+                        <div class="tab-content hidden" id="tab-content-4">
+                            <p class="text-gray-700 leading-relaxed">Là vũ khí lý luận sắc bén để bảo vệ nền tảng tư tưởng của Đảng trên không gian mạng, đấu tranh với các quan điểm sai trái, thù địch, xử lý tin giả, và xây dựng môi trường số lành mạnh, an toàn và tiến bộ.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+             <h3 class="text-xl font-semibold">Kết luận</h3>
+             <p class="mt-4 max-w-3xl mx-auto text-base text-black-300">Thực tiễn đã chứng minh triết học Mác - Lênin là hệ thống lý luận mở, khoa học và cách mạng. Nó đã, đang và sẽ tiếp tục là nền tảng tư tưởng vững chắc, phương pháp luận khoa học để Đảng và nhân dân ta vượt qua thách thức, thực hiện thành công mục tiêu xây dựng một nước Việt Nam phồn vinh, hạnh phúc.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Smooth scroll for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(this.getAttribute('href'));
+                    if(targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+});
+            
+            // Tabs functionality
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.dataset.tab;
+
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    tabContents.forEach(content => {
+                        if (content.id === `tab-content-${tabId}`) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+            
+            // Chart.js GDP Chart
+            const ctx = document.getElementById('gdpChart');
+            if (ctx) {
+                const gdpChart = new Chart(ctx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['1985', '1990', '1995', '2000', '2005', '2010', '2015', '2020', '2024'],
+                        datasets: [{
+                            label: 'GDP Việt Nam (tỷ USD - ước tính)',
+                            data: [20.3, 6.48, 20.7, 31.2, 57.6, 116, 193, 271, 469],
+                            backgroundColor: 'rgba(192, 57, 43, 0.1)',
+                            borderColor: '#c0392b',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            pointBackgroundColor: '#c0392b',
+                            pointRadius: 4,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + ' tỷ USD';
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'GDP: ' + context.parsed.y + ' tỷ USD';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Intersection Observer for fade-in animations
+const sections = document.querySelectorAll('.section-fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
+        <!-- =========== FOOTER (PHỤ LỤC) =========== -->
+<div class="bg-[#59402d] text-gray-300 w-full py-12">
+            <div class="container mx-auto px-4">
+                <footer class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-left text-sm">
+                    <div class="md:col-span-1">
+                        <div class="text-sm text-gray-400 font-semibold">
+                            <p>MLN111 - SE1708 - ThuyHTV</p>
+                            <p>do nhóm 1 thực hiện</p>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        <div>
+                            <h2 class="text-xl font-bold text-white mb-4">Phụ lục các mục</h2>
+                             <ul class="space-y-2 text-gray-400">
+                                <li><strong class="text-gray-200">Trang chủ:</strong> Tổng quan và sơ lược.</li>
+                                <li><strong class="text-gray-200">Nội dung:</strong> Lịch sử, Vai trò Nền tảng và Vai trò trong CĐS.</li>
+                                <li><strong class="text-gray-200">Quiz:</strong> Bài trắc nghiệm củng cố kiến thức.</li>
+                            </ul>
+                        </div>
+                         <div>
+                            <h2 class="text-xl font-bold text-white mb-4">Phụ lục AI</h2>
+                            <p class="text-gray-400">Trang web này được xây dựng với sự hỗ trợ của AI để tổng hợp, cấu trúc nội dung và tạo mã nguồn.</p>
+                        </div>
+                    </div>
+                </footer>
+                <div class="text-left max-w-6xl mx-auto mt-8 text-gray-500 text-sm">
+                     <p>&copy; 2025. Nội dung tổng hợp từ tài liệu học tập.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="to-top-button" title="Go To Top" class="hidden fixed z-50 bottom-10 right-10 p-4 border-0 w-14 h-14 rounded-full shadow-md bg-[#ac541c] hover:bg-[#86623e] text-white text-lg font-semibold transition-opacity duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 4l8 8h-6v8h-4v-8H4l8-8z" /></svg>
+    </button>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.animated-item').forEach(el => observer.observe(el));
+            
+            // Scroll-to-top button
+            const toTopButton = document.getElementById('to-top-button');
+            if (toTopButton) {
+                window.onscroll = () => {
+if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                        toTopButton.classList.remove('hidden');
+                    } else {
+                        toTopButton.classList.add('hidden');
+                    }
+                };
+                toTopButton.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>

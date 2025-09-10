@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vai trò trong CĐS - Triết Học Mác - Lênin & Chuyển Đổi Số</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; 
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #ac541c, #86623e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .animated-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animated-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-[#59402d]">
+
+    <!-- =========== HEADER VÀ MENU MỚI =========== -->
+    <header class="sticky top-0 z-30 bg-[#ac541c] text-white shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="https://i.imgur.com/GqN4g2W.png" alt="FPT University Logo" class="h-10">
+            </a>
+            <nav class="flex items-center space-x-4 font-semibold">
+                <a href="index.html" class="px-3 py-2 hover:bg-black/10 rounded-md transition-colors">Trang chủ</a>
+                <div x-data="{ open: false }" @mouseleave="open = false" class="relative">
+                    <a @mouseover="open = true" href="#" class="px-3 py-2 bg-black/20 rounded-md transition-colors flex items-center">
+                        Nội dung
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div x-show="open" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+x-transition:leave="transition ease-in duration-1000"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-xl text-[#59402d]">
+                        <a href="history.html" class="block px-4 py-3 text-sm hover:bg-[#f4f1ea] transition-colors">Lịch sử Triết học Mác - Lênin</a>
+                        <a href="platform_role.html" class="block px-4 py-3 text-sm hover:bg-[#f4f1ea] transition-colors">Vai trò nền tảng</a>
+                        <a href="digital_role.html" class="block px-4 py-3 text-sm bg-[#f4f1ea] font-bold transition-colors">Vai trò trong Chuyển đổi số</a>
+                    </div>
+                </div>
+                <a href="quiz.html" class="px-3 py-2 hover:bg-black/10 rounded-md transition-colors">Quiz</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- =========== NỘI DUNG TRANG VAI TRÒ CĐS =========== -->
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <header class="text-center mb-10"><h1 class="text-4xl md:text-5xl font-bold gradient-text">Vai trò đặc biệt trong nhiệm vụ thực hiện chuyển đổi số ở Việt Nam hiện nay</h1></header>
+        <main class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-lg animated-item">
+             <section>
+                <p class="text-[#59402d] leading-relaxed mb-6">Chuyển đổi số là một yêu cầu tất yếu khách quan, một nhiệm vụ chiến lược của Việt Nam trong giai đoạn hiện nay. Quá trình này đặt ra nhiều vấn đề lý luận và thực tiễn mới mẻ, phức tạp. Một lần nữa, triết học Mác - Lênin lại tỏ rõ vai trò định hướng quan trọng.</p>
+                <div class="space-y-6">
+                    <div class="p-4 bg-[#f4f1ea] rounded-lg">
+                        <h3 class="font-semibold text-lg text-[#59402d]">Định hướng mục tiêu "lấy người dân làm trung tâm"</h3>
+                        <p class="mt-2">Quan điểm của chủ nghĩa duy vật lịch sử về vai trò của quần chúng nhân dân là người sáng tạo ra lịch sử là cơ sở lý luận sâu sắc cho chủ trương coi người dân là trung tâm của quá trình chuyển đổi số. Chuyển đổi số không phải là cuộc chạy đua về công nghệ thuần túy, mà phải hướng tới mục tiêu cao cả là phục vụ con người, nâng cao chất lượng cuộc sống, thúc đẩy công bằng và tiến bộ xã hội. Triết học Mác - Lênin giúp chúng ta nhận thức rõ công nghệ phải phục vụ con người, đảm bảo mọi người dân đều được hưởng lợi từ quá trình này, tránh tạo ra những hố sâu ngăn cách mới trong xã hội.</p>
+                    </div>
+<div class="p-4 bg-[#f4f1ea] rounded-lg">
+                        <h3 class="font-semibold text-lg text-[#59402d]">Công cụ phân tích và giải quyết các mâu thuẫn mới</h3>
+                        <p class="mt-2">Chuyển đổi số làm nảy sinh hàng loạt mâu thuẫn biện chứng: giữa phát triển kinh tế số và đảm bảo an ninh mạng; giữa quyền tự do thông tin và trách nhiệm quản lý nhà nước; giữa lợi ích của các tập đoàn công nghệ toàn cầu và chủ quyền số quốc gia; giữa việc ứng dụng trí tuệ nhân tạo, tự động hóa và vấn đề việc làm, an sinh xã hội. Phép biện chứng duy vật cung cấp phương pháp luận để nhận diện, phân tích và tìm ra các giải pháp hài hòa, cân bằng để giải quyết các mâu thuẫn này, thúc đẩy sự phát triển bền vững thay vì rơi vào các thái cực phiến diện.</p>
+                    </div>
+                    <div class="p-4 bg-[#f4f1ea] rounded-lg">
+                        <h3 class="font-semibold text-lg text-[#59402d]">Khẳng định vai trò kiến tạo, dẫn dắt của Nhà nước</h3>
+                        <p class="mt-2">Lý luận Mác - Lênin về nhà nước và cách mạng xã hội chủ nghĩa cung cấp cơ sở để khẳng định vai trò chủ đạo, kiến tạo và dẫn dắt của Nhà nước pháp quyền xã hội chủ nghĩa trong chuyển đổi số. Thay vì để quá trình này phát triển một cách tự phát theo cơ chế thị trường, Nhà nước phải đóng vai trò "nhạc trưởng", xây dựng chiến lược, hoàn thiện thể chế, đầu tư vào hạ tầng số thiết yếu, và định hướng toàn bộ quá trình phục vụ lợi ích quốc gia, dân tộc.</p>
+                    </div>
+                    <div class="p-4 bg-[#f4f1ea] rounded-lg">
+                        <h3 class="font-semibold text-lg text-[#59402d]">Bảo đảm tính định hướng xã hội chủ nghĩa trong môi trường số</h3>
+                        <p class="mt-2">Triết học Mác - Lênin là vũ khí lý luận để bảo vệ nền tảng tư tưởng của Đảng trong không gian mạng, một "vùng lãnh thổ" mới. Nó giúp chúng ta nhận diện và đấu tranh hiệu quả với các quan điểm sai trái, thù địch, các thông tin xuyên tạc, độc hại, đồng thời xây dựng một môi trường văn hóa số lành mạnh, tiến bộ, góp phần củng cố khối đại đoàn kết toàn dân tộc và xây dựng con người mới xã hội chủ nghĩa.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- =========== FOOTER (PHỤ LỤC) =========== -->
+    <div class="bg-[#59402d] text-gray-300 w-full py-12 mt-10">
+        <div class="container mx-auto px-4 animated-item">
+            <footer class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-left text-sm">
+                <div class="md:col-span-1">
+                    <div class="text-sm text-gray-400 font-semibold">
+<p>MLN111 - SE1708 - ThuyHTV</p>
+                        <p>do nhóm 1 thực hiện</p>
+                    </div>
+                </div>
+                <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <div>
+                        <h2 class="text-xl font-bold text-white mb-4">Phụ lục các mục</h2>
+                         <ul class="space-y-2 text-gray-400">
+                            <li><strong class="text-gray-200">Trang chủ:</strong> Tổng quan và sơ lược.</li>
+                            <li><strong class="text-gray-200">Nội dung:</strong> Lịch sử, Vai trò Nền tảng và Vai trò trong CĐS.</li>
+                            <li><strong class="text-gray-200">Quiz:</strong> Bài trắc nghiệm củng cố kiến thức.</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h2 class="text-xl font-bold text-white mb-4">Phụ lục AI</h2>
+                        <p class="text-gray-400">Trang web này được xây dựng với sự hỗ trợ của AI để tổng hợp, cấu trúc nội dung và tạo mã nguồn.</p>
+                    </div>
+                </div>
+            </footer>
+            <div class="text-left max-w-6xl mx-auto mt-8 text-gray-500 text-sm">
+                 <p>&copy; 2025. Nội dung tổng hợp từ tài liệu học tập.</p>
+            </div>
+        </div>
+    </div>
+    
+    <button id="to-top-button" title="Go To Top" class="hidden fixed z-50 bottom-10 right-10 p-4 border-0 w-14 h-14 rounded-full shadow-md bg-[#ac541c] hover:bg-[#86623e] text-white text-lg font-semibold transition-opacity duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 4l8 8h-6v8h-4v-8H4l8-8z" /></svg>
+    </button>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.animated-item').forEach(el => observer.observe(el));
+            
+            const toTopButton = document.getElementById('to-top-button');
+            if (toTopButton) {
+                window.onscroll = () => {
+                    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                        toTopButton.classList.remove('hidden');
+                    } else {
+                        toTopButton.classList.add('hidden');
+                    }
+                };
+                toTopButton.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>

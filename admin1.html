@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Quản Trị Hệ Thống Thi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        th { text-align: left; }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4 md:p-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">Bảng Điều Khiển Quản Trị</h1>
+
+        <!-- Nút tạo dữ liệu mẫu -->
+        <div class="mb-8">
+            <button id="setup-data-btn" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700">
+                Tạo Dữ Liệu Mẫu (Chỉ chạy 1 lần)
+            </button>
+            <p class="text-sm text-gray-500 mt-2">
+                Nhấn nút này để tạo tài khoản thí sinh và đề thi mẫu trong cơ sở dữ liệu.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Bảng Kết quả thi -->
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Kết Quả Thi Mới Nhất</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b">
+                                <th class="py-2">Thí Sinh</th>
+                                <th class="py-2">Mã Đề</th>
+                                <th class="py-2">Điểm</th>
+                                <th class="py-2">Thời Gian Nộp</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results-table-body">
+                           <!-- Dữ liệu sẽ được chèn vào đây bởi JS -->
+                           <tr><td colspan="4" class="text-center py-4 text-gray-500">Chưa có kết quả nào.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Bảng Thí sinh & Đề thi -->
+            <div class="space-y-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Danh Sách Thí Sinh</h2>
+                    <ul id="users-list" class="space-y-2">
+                        <li class="text-gray-500">Đang tải...</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Danh Sách Đề Thi</h2>
+                    <ul id="exams-list" class="space-y-2">
+                         <li class="text-gray-500">Đang tải...</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // --- FIREBASE IMPORTS ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, doc, setDoc, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // --- FIREBASE CONFIG (UPDATED) ---
+        // Replaced the old firebaseConfig with the new one provided by the user.
+        const firebaseConfig = {
+            apiKey: "AIzaSyDG_7j_aXi9kp5C_hVxu0UhA7dMb_XY8ck",
+            authDomain: "httn-tf-01.firebaseapp.com",
+            projectId: "httn-tf-01",
+            storageBucket: "httn-tf-01.firebaseapp.com",
+            messagingSenderId: "952866478297",
+            appId: "1:952866478297:web:9a9ca4124ed5e8d99106c8",
+            measurementId: "G-EREBQ1LNSG"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        // --- GLOBAL APP ID (DO NOT CHANGE) ---
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app';
+
+        // --- DOM ELEMENTS ---
+        const resultsTableBody = document.getElementById('results-table-body');
+        const usersList = document.getElementById('users-list');
+        const examsList = document.getElementById('exams-list');
+        const setupDataBtn = document.getElementById('setup-data-btn');
+
+        // --- SETUP MOCK DATA ---
+        setupDataBtn.addEventListener('click', async () => {
+            if (!confirm("Hành động này sẽ ghi đè dữ liệu mẫu. Bạn có chắc chắn?")) return;
+            
+            alert("Đang tạo dữ liệu... Vui lòng chờ.");
+            try {
+                const batch = writeBatch(db);
+
+                // Create users
+                const usersData = {
+                    "student1": { name: "Nguyễn Văn An" },
+                    "student2": { name: "Trần Thị Bình" }
+                };
+                for (const [id, data] of Object.entries(usersData)) {
+                    const userRef = doc(db, `artifacts/${appId}/public/data/users`, id);
+                    batch.set(userRef, data);
+                }
+
+                // Create exams
+                const examsData = {
+                    "PRJ311": {
+                        title: "Lập trình Java",
+                        durationMinutes: 15,
+                        questions: [
+                            { question: "Đâu là thủ đô của Việt Nam?", options: ["TP. HCM", "Đà Nẵng", "Hà Nội"], answer: "Hà Nội", image: null },
+                            { question: "Đối tượng nào dùng để trả về kết quả SQL?", options: ["RecordSet", "ResultSet", "DataSet"], answer: "ResultSet", image: "https://i.imgur.com/2Y5Fm7p.png" }
+                        ]
+                    },
+                    "CSD201": {
+                        title: "Cấu trúc dữ liệu và giải thuật",
+                        durationMinutes: 20,
+                        questions: [
+                            { question: "Độ phức tạp của thuật toán tìm kiếm nhị phân là gì?", options: ["O(n)", "O(log n)", "O(n^2)"], answer: "O(log n)", image: null }
+                        ]
+                    }
+                };
+                for (const [id, data] of Object.entries(examsData)) {
+                    const examRef = doc(db, `artifacts/${appId}/public/data/exams`, id);
+                    batch.set(examRef, data);
+                }
+
+                await batch.commit();
+                alert("Tạo dữ liệu mẫu thành công! Trang sẽ tự động cập nhật.");
+            } catch (error) {
+                console.error("Error setting up data: ", error);
+                alert("Có lỗi xảy ra khi tạo dữ liệu.");
+            }
+        });
+
+        // --- REAL-TIME LISTENERS ---
+
+        // Listen for new results
+        const resultsCollectionRef = collection(db, `artifacts/${appId}/public/data/results`);
+        onSnapshot(resultsCollectionRef, (snapshot) => {
+            if (snapshot.empty) {
+                resultsTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-4 text-gray-500">Chưa có kết quả nào.</td></tr>';
+                return;
+            }
+            resultsTableBody.innerHTML = '';
+            const results = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
+            // Sắp xếp kết quả mới nhất lên đầu
+            results.sort((a, b) => b.submittedAt.toMillis() - a.submittedAt.toMillis());
+
+            results.forEach(result => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b';
+                tr.innerHTML = `
+                    <td class="py-3 pr-3">${result.userName} (${result.userId})</td>
+                    <td class="py-3 pr-3">${result.examCode}</td>
+                    <td class="py-3 pr-3 font-bold">${result.score}%</td>
+                    <td class="py-3 pr-3 text-sm text-gray-600">${result.submittedAt.toDate().toLocaleString('vi-VN')}</td>
+                `;
+                resultsTableBody.appendChild(tr);
+            });
+        });
+
+        // Listen for users
+        const usersCollectionRef = collection(db, `artifacts/${appId}/public/data/users`);
+        onSnapshot(usersCollectionRef, (snapshot) => {
+            usersList.innerHTML = '';
+            snapshot.forEach(doc => {
+                const li = document.createElement('li');
+                li.className = 'flex justify-between items-center p-2 bg-gray-50 rounded';
+                li.innerHTML = `<span>${doc.data().name}</span><span class="text-sm text-gray-500 font-mono">${doc.id}</span>`;
+                usersList.appendChild(li);
+            });
+        });
+
+        // Listen for exams
+        const examsCollectionRef = collection(db, `artifacts/${appId}/public/data/exams`);
+        onSnapshot(examsCollectionRef, (snapshot) => {
+            examsList.innerHTML = '';
+            snapshot.forEach(doc => {
+                const li = document.createElement('li');
+                li.className = 'flex justify-between items-center p-2 bg-gray-50 rounded';
+                li.innerHTML = `<span>${doc.data().title}</span><span class="text-sm text-gray-500 font-mono">${doc.id}</span>`;
+                examsList.appendChild(li);
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phụ Lục - Triết Học Mác - Lênin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(to right, #1e3a8a, #3b82f6, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .dark .gradient-text {
+            background: linear-gradient(to right, #60a5fa, #a78bfa, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .animated-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 2s ease-out, transform 2s ease-out;
+        }
+        .animated-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <header class="text-center mb-10">
+            <div class="flex justify-center items-center mb-4">
+                <h1 class="text-4xl md:text-5xl font-bold gradient-text">Phụ Lục</h1>
+                <button id="theme-toggle" type="button" class="ml-4 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                   <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-.707 8.486a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+        </header>
+        <nav class="bg-white dark:bg-gray-800 rounded-lg shadow-md mb-8 sticky top-4 z-10">
+            <ul class="flex flex-wrap justify-center items-center p-2">
+                <li><a href="index.html" class="font-semibold p-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block -mt-1" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg> Trang Chủ</a></li>
+                <li><a href="content.html" class="font-semibold p-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Nội Dung Chính</a></li>
+                <li><a href="appendix.html" class="font-semibold p-3 border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400">Phụ Lục</a></li>
+                <li><a href="quiz.html" class="font-semibold p-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Mini Quiz</a></li>
+            </ul>
+        </nav>
+        <main class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg">
+            <section class="animated-section">
+                <h2 class="text-3xl font-bold text-blue-900 dark:text-blue-300 mb-4">Tóm Tắt Cấu Trúc Trang Web</h2>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">Trang web được cấu trúc thành các tệp riêng biệt để người dùng có thể dễ dàng tiếp cận và tìm hiểu thông tin.</p>
+                <ul class="space-y-4">
+                    <li class="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                        <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-100">1. Trang Chủ (index.html)</h3>
+                        <p class="mt-1 text-gray-600 dark:text-gray-400">Là điểm khởi đầu, giới thiệu tổng quan về chủ đề và cung cấp lối vào các trang con.</p>
+                    </li>
+<li class="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                        <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-100">2. Nội Dung Chính (content.html)</h3>
+                        <p class="mt-1 text-gray-600 dark:text-gray-400">Trang này chứa bài phân tích chi tiết, được chia làm hai phần chính:</p>
+                         <ul class="list-disc list-inside ml-4 mt-2 text-gray-600 dark:text-gray-400">
+                            <li><strong>Phần I:</strong> Vai trò nền tảng trong đời sống xã hội và sự nghiệp đổi mới.</li>
+                            <li><strong>Phần II:</strong> Vai trò đặc biệt trong nhiệm vụ chuyển đổi số.</li>
+                         </ul>
+                    </li>
+                     <li class="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                        <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-100">3. Mini Quiz (quiz.html)</h3>
+                         <p class="mt-1 text-gray-600 dark:text-gray-400">Một bài trắc nghiệm nhỏ gồm 5 câu hỏi để người dùng tự kiểm tra và củng cố kiến thức đã đọc.</p>
+                    </li>
+                </ul>
+                <p class="mt-6 text-sm text-gray-500 dark:text-gray-400">Mỗi trang (ngoại trừ Trang Chủ) đều có thanh điều hướng chung để di chuyển thuận tiện.</p>
+            </section>
+        </main>
+        <footer class="text-center mt-12 text-gray-500 dark:text-gray-400"><p>&copy; 2025. Nội dung tổng hợp từ tài liệu học tập.</p></footer>
+        <button id="to-top-button" title="Go To Top" class="hidden fixed z-50 bottom-10 right-10 p-4 border-0 w-14 h-14 rounded-full shadow-md bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold transition-opacity duration-300"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 4l8 8h-6v8h-4v-8H4l8-8z" /></svg></button>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
